@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+	    <link href="thirdParty/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	    <script src="thirdParty/js/angular.js"></script>
+		<script src="thirdParty/js/angular-ui-router.js"></script>
+	</head>
+
+	<body>
+		<div class="container" ng-app="frontend">
+			<div ui-view></div>		    
+    		<div ng-include="'templates/footer.html'"></div>
+    	</div>
+
+    </body>
+
+	<!-- Scripts -->	    
+	<script src="app.js"></script>
+	<script src="controllers/loginCtrl.js"></script>
+	<script src="controllers/homeCtrl.js"></script>
+	<script src="controllers/archiveCtrl.js"></script>
+	<script src="controllers/settingsCtrl.js"></script>
+	<script src="services/serviceUserInformation.js"></script>
+	<script src="services/CRUDServiceDrone.js"></script>
+
+</html>
