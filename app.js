@@ -7,7 +7,8 @@ angular
     'google-maps'.ns(),
     'frontend.AuthenticationServices',
     'frontend.CRUDservices',
-    'frontend.DroneServices'
+    'frontend.DroneServices',
+    'frontend.MapServices'
   ])
   .config(['$urlRouterProvider', '$stateProvider', 'GoogleMapApiProvider'.ns(), function($urlRouterProvider, $stateProvider, GoogleMapApi) {
     $urlRouterProvider.otherwise('/');
