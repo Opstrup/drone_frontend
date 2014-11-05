@@ -2,9 +2,11 @@
 
 angular
     .module('frontend')
-    .controller('loginCtrl', ['$scope', 'ServiceUserInformation', function($scope, ServiceUserInformation) {
+    .controller('loginCtrl', ['$scope', 'AuthenticationServices', function($scope, AuthenticationServices) {
     $scope.title = "Login";
 
-    ServiceUserInformation.test();
+    $scope.onLogIn = function() {
+      AuthenticationServices.authenticationUser($scope.username, $scope.password);
+    }
 
   }]);

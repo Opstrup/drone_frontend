@@ -4,12 +4,14 @@
 angular
   .module('frontend', [
     'ui.router',
-    'frontend.services',
-    'frontend.CRUDservices'
+    'google-maps'.ns(),
+    'frontend.AuthenticationServices',
+    'frontend.CRUDservices',
+    'frontend.DroneServices'
   ])
-  .config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider, $stateProvider) {
+  .config(['$urlRouterProvider', '$stateProvider', 'GoogleMapApiProvider'.ns(), function($urlRouterProvider, $stateProvider, GoogleMapApi) {
     $urlRouterProvider.otherwise('/');
-    
+
     $stateProvider
       .state('login', {
         url: '/',
@@ -31,4 +33,10 @@ angular
         templateUrl: 'templates/settings.html',
         controller: 'settingsCtrl'
       });
+
+      GoogleMapApi.configure({
+            key: 'AIzaSyBpkoDhSFjmB11ANxwUBkT6WUabM_lMZDU',
+            v: '3.17',
+            libraries: 'weather,geometry,visualization'
+        });
   }]);

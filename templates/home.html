@@ -1,2 +1,73 @@
 <header ng-include="'templates/nav.html'"></header>
+<link href="costum_css/homePage.css" rel="stylesheet" media="screen">
 <h1>{{title}}</h1>
+
+<div class="row">
+  <div class="col-md-3">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#id</th>
+          <th>Status</th>
+          <th>Model</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="drone in allDrones" ng-click="singleDroneInfo(drone.next_event, drone.id)">
+          <td>{{drone.id}}</td>
+          <td ng-if="drone.is_online == true">
+            <div class="progress">
+              <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemax="100" style="width: 100%">
+                Online
+              </div>
+            </div>
+          </td>
+          <td ng-if="drone.is_online != true">
+            <div class="progress">
+              <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="100" aria-valuemax="100" style="width: 100%">
+                Offline
+              </div>
+            </div>
+          </td>
+          <td>{{drone.model}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-md-2">
+
+    <!-- text if drone has a path -->
+    <!-- <h4>{{droneStatus}}</h4> -->
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Height</th>
+          <th class="glyphicon glyphicon-camera"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="waypoint in waypointsForDrone">
+          <td>{{waypoint.id}}</td>
+          <td>{{waypoint.height}}m</td>
+          <td ng-if="waypoint.take_photo == true">
+            <input type="checkbox" checked>
+          </td>
+          <td ng-if="waypoint.take_photo != true">
+            <input type="checkbox">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-md-7">
+    <ui-gmap-google-map center="map.center" zoom="map.zoom">
+      <ui-gmap-marker coords="marker.coords" idkey="marker.id">
+      </ui-gmap-marker>
+    </ui-gmap-google-map>
+  </div>
+
+</div>

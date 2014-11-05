@@ -8,11 +8,12 @@
 angular
     .module('frontend.CRUDservices', [])
     .factory('CRUDServiceDrone',['$http', function($http){
-        var CRUDServiceDrone;
-        return CRUDServiceDrone = {
+        var serverAddress = "http://127.0.0.1:8000";
+        
+        return {
           get: function(url)
           {
-            return $http.get(url);
+            return $http.get(serverAddress + url);
           },
 
           put: function()
