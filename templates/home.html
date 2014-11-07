@@ -3,6 +3,8 @@
 <h1>{{title}}</h1>
 
 <div class="row">
+
+  <!-- Collum with drone table -->
   <div class="col-md-3">
     <table class="table table-hover">
       <thead>
@@ -13,7 +15,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="drone in allDrones" ng-click="singleDroneInfo(drone.next_event, drone.id)">
+        <tr ng-repeat="drone in allDrones" ng-click="updateView(drone.next_event, drone.id)">
           <td>{{drone.id}}</td>
           <td ng-if="drone.is_online == true">
             <div class="progress">
@@ -35,6 +37,7 @@
     </table>
   </div>
 
+  <!-- Collum with waypoint table -->
   <div class="col-md-2">
 
     <!-- text if drone has a path -->
@@ -63,10 +66,16 @@
     </table>
   </div>
 
+  <!-- Collum with map -->
   <div class="col-md-7">
     <ui-gmap-google-map center="map.center" zoom="map.zoom">
-      <ui-gmap-marker coords="marker.coords" idkey="marker.id">
+      <!-- Drone marker -->
+      <ui-gmap-marker coords="marker.coords" idkey="marker.id" icon="marker.icon">
       </ui-gmap-marker>
+
+      <!-- Waypoints marker -->
+      <ui-gmap-markers models="randomMarkers" coords="'self'" icon="'icon'">
+      </ui-gmap-markers>
     </ui-gmap-google-map>
   </div>
 
