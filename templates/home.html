@@ -42,7 +42,6 @@
 
     <!-- text if drone has a path -->
     <!-- <h4>{{droneStatus}}</h4> -->
-
     <table class="table table-hover">
       <thead>
         <tr>
@@ -68,15 +67,21 @@
 
   <!-- Collum with map -->
   <div class="col-md-7">
-    <ui-gmap-google-map center="map.center" zoom="map.zoom">
+    <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options">
       <!-- Drone marker -->
       <ui-gmap-marker coords="marker.coords" idkey="marker.id" icon="marker.icon">
+        <ui-gmap-window>
+          This is the drone!
+        </ui-gmap-window>
       </ui-gmap-marker>
 
       <!-- Waypoints marker -->
-      <ui-gmap-markers models="randomMarkers" coords="'self'" icon="'icon'">
+      <ui-gmap-markers models="waypointList" coords="'self'" icon="'icon'">
       </ui-gmap-markers>
+
     </ui-gmap-google-map>
+
+    {{waypointList}}
   </div>
 
-</div>
+</div> <!-- Closing of row -->
