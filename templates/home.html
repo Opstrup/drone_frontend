@@ -6,6 +6,7 @@
 
   <!-- Collum with drone table -->
   <div class="col-md-3">
+
     <table class="table table-hover">
       <thead>
         <tr>
@@ -35,41 +36,56 @@
         </tr>
       </tbody>
     </table>
-  </div>
+
+  </div> <!-- Closing of collum -->
 
   <!-- Collum with waypoint table -->
   <div class="col-md-2">
 
-    <!-- text if drone has a path -->
-    <!-- <h4>{{droneStatus}}</h4> -->
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Height</th>
-          <th class="glyphicon glyphicon-camera"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="waypoint in waypointsForDrone">
-          <td>{{waypoint.id}}</td>
-          <td>{{waypoint.height}}m</td>
-          <td ng-if="waypoint.take_photo == true">
-            <input type="checkbox" checked>
-          </td>
-          <td ng-if="waypoint.take_photo != true">
-            <input type="checkbox">
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+    <!-- This table is only showen if there is any waypoints for the drone -->
+    <div ng-show="waypointsForDrone.length >= 1">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Height</th>
+            <th class="glyphicon glyphicon-camera"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="waypoint in waypointsForDrone">
+            <td>{{waypoint.id}}</td>
+            <td>{{waypoint.height}}m</td>
+            <td ng-if="waypoint.take_photo == true">
+              <input type="checkbox" checked>
+            </td>
+            <td ng-if="waypoint.take_photo != true">
+              <input type="checkbox">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button type="button" class="btn btn-default">
+        <div ng-if="waypointsForDrone.length >= 1">
+          Start drone
+        </div>
+      </button>
+    </div>
+
+    <button type="button" class="btn btn-default" ng-if="waypointsForDrone.length == 0">
+      Create flightpath
+    </button>
+
+  </div> <!-- Closing of collum -->
 
   <!-- Collum with map -->
   <div class="col-md-7">
-    <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options">
+
+    <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="{scrollwheel: false}" events="events">
+      <!-- Drawing manager for creating waypoints -->
+
       <!-- Drone marker -->
-      <ui-gmap-marker coords="marker.coords" idkey="marker.id" icon="marker.icon">
+      <ui-gmap-marker coords="droneMarker.coords" idkey="droneMarker.id" icon="droneMarker.icon">
         <ui-gmap-window>
           This is the drone!
         </ui-gmap-window>
@@ -80,8 +96,6 @@
       </ui-gmap-markers>
 
     </ui-gmap-google-map>
-
-    {{waypointList}}
-  </div>
+  </div> <!-- Closing of collum -->
 
 </div> <!-- Closing of row -->

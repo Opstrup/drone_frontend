@@ -6,19 +6,20 @@ angular
     return{
 
       /**
-       * Initialize the map on the page with the given center coords.
+       * Initialize the map on the page.
        * Zoom level is 17.
        * (The higher zoom level is the more zoom)
        **/
-      initMap: function(centerLatitude, centerLongitude)
+      initMap: function()
       {
-        return {
-                center: {
-                  latitude: centerLatitude,
-                  longitude: centerLongitude
-                },
-                zoom: 17
-                };
+        return  {
+                  center: {
+                    latitude: 56.172280736338074,
+                    longitude: 10.191149711608887
+                  },
+                  zoom: 17,
+                }
+
       },
 
       /**
@@ -66,37 +67,50 @@ angular
        * Draws all the waypoints for the drone on the map.
        * Input: waypoint array
        **/
-      initWaypointsMarker: function()
+      drawWaypointsMarker: function(waypointArray)
       {
-        return {
-                  id: 1,
-                }
+        var createWaypoints = function(i, latitude, longitude, idKey)
+        {
+          if (idKey == null)
+            {
+              idKey = "id";
+            }
+
+          var latitude = latitude;
+          var longitude = longitude;
+
+          var returnValue = {
+              latitude: latitude,
+              longitude: longitude,
+              title: 'Waypoint ' + i
+          };
+          returnValue[idKey] = i;
+          return returnValue;
+        };
+
+       var waypoints = [];
+       for (var i = 0; i < waypointArray.length; i++) {
+         waypoints.push(createWaypoints(i, waypointArray[i].latitude, waypointArray[i].longitude))
+       }
+
+       return waypoints;
       },
 
       /**
-       * Draws all the waypoints for the drone on the map.
-       * Input: waypoint array
+       * Initialize the drawer for the map.
        **/
-      drawWaypointsMarker: function()
+      initDrawMarker: function()
       {
-        return  [
-                  {
-                    latitude: 56.171211605108816,
-                    longtitude: 10.191653966903687,
-                    title: "title1",
-                    id: 1
-                    // icon: "http://icons.iconarchive.com/icons/ncrow/mega-pack-1/16/Yahoo-Messenger-icon.png"
-                  },
-                  {
-                    latitude: 56.171360926901414,
-                    longtitude: 10.190484523773193,
-                    title: "title2",
-                    id: 2
-                    // icon: "http://icons.iconarchive.com/icons/ncrow/mega-pack-1/16/Yahoo-Messenger-icon.png"
+        return {
+                  drawingControl: true,
+                  drawingControlOptions: {
+                    position: google.maps.ControlPosition.TOP_CENTER,
+                      drawingModes: [
+                        google.maps.drawing.OverlayType.MARKER,
+                      ]
                   }
-                ]
+                }
       },
-
 
     }
   }]);
