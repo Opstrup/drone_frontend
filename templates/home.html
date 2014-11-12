@@ -4,7 +4,7 @@
 
 <div class="row">
 
-  <!-- Collum with drone table -->
+  <!-- column with drone table -->
   <div class="col-md-3">
 
     <table class="table table-hover">
@@ -36,14 +36,38 @@
         </tr>
       </tbody>
     </table>
+  </div> <!-- Closing of column -->
 
-  </div> <!-- Closing of collum -->
-
-  <!-- Collum with waypoint table -->
+  <!-- column with waypoint table -->
   <div class="col-md-2">
 
     <!-- This table is only showen if there is any waypoints for the drone -->
-    <div ng-show="waypointsForDrone.length >= 1">
+    <div ng-show="waypointList.length >= 1">
+      <!-- Event panel -->
+      <div class="panel panel-default">
+        <div class="panel-heading">Test Evet #1</div>
+        <div class="panel-body">
+          Comment:
+        <textarea class="form-control" rows="1"></textarea>
+        </div>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <div class="input-group input-group-sm">
+              <span class="input-group-addon">Date</span>
+              <input type="text" class="form-control" placeholder="12. nov">
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="input-group input-group-sm">
+              <span class="input-group-addon">Warnings</span>
+              <input type="text" class="form-control" placeholder="0">
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Waypoint panel -->
+      <h4>Waypoints</h4>
       <table class="table table-hover">
         <thead>
           <tr>
@@ -53,9 +77,16 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="waypoint in waypointsForDrone">
-            <td>{{waypoint.id}}</td>
-            <td>{{waypoint.height}}m</td>
+          <tr ng-repeat="waypoint in waypointList">
+            <td>
+              {{$index + 1}}
+            </td>
+            <td>
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="{{waypoint.height}}">
+                <span class="input-group-addon">m</span>
+              </div>
+            </td>
             <td ng-if="waypoint.take_photo == true">
               <input type="checkbox" checked>
             </td>
@@ -65,37 +96,54 @@
           </tr>
         </tbody>
       </table>
+
+      <!-- Start button -->
       <button type="button" class="btn btn-default">
-        <div ng-if="waypointsForDrone.length >= 1">
+        <div ng-if="waypointList.length >= 1">
           Start drone
         </div>
       </button>
     </div>
 
-    <button type="button" class="btn btn-default" ng-if="waypointsForDrone.length == 0">
-      Create flightpath
-    </button>
+    <!-- This table is only showen if there isn't any waypoints for the drone -->
+    <div ng-show="waypointList.length == 0 && noDroneSelected == false">
+      <div class="panel panel-default">
+        <div class="panel-heading"><h4>No events for drone!</h4></div>
+        <div class="panel-body">
+          The drone does not have a event.<br><br>
+          Click on the map to start a new event.
+        </div>
+      </div>
+    </div>
 
-  </div> <!-- Closing of collum -->
+    <!-- No drone selected message -->
+    <div ng-show="noDroneSelected == true">
+      <div class="panel panel-default">
+        <div class="panel-heading"><h4>No drone selected!</h4></div>
+        <div class="panel-body">
+          Click on a drone from the table to see more.<br><br>
+        </div>
+      </div>
+    </div>
 
-  <!-- Collum with map -->
+  </div> <!-- Closing of column -->
+
+  <!-- column with map -->
   <div class="col-md-7">
 
     <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="{scrollwheel: false}" events="events">
-      <!-- Drawing manager for creating waypoints -->
-
       <!-- Drone marker -->
-      <ui-gmap-marker coords="droneMarker.coords" idkey="droneMarker.id" icon="droneMarker.icon">
-        <ui-gmap-window>
-          This is the drone!
+      <ui-gmap-marker coords="droneMarkerView.coords" idkey="droneMarkerView.id" icon="droneMarkerView.icon">
+        <ui-gmap-window options="windowOptions">
+          This is the drone!!
         </ui-gmap-window>
       </ui-gmap-marker>
 
       <!-- Waypoints marker -->
-      <ui-gmap-markers models="waypointList" coords="'self'" icon="'icon'">
+      <ui-gmap-markers models="waypointListView" coords="'self'" icon="'icon'">
       </ui-gmap-markers>
 
     </ui-gmap-google-map>
-  </div> <!-- Closing of collum -->
+  </div> <!-- Closing of column -->
 
 </div> <!-- Closing of row -->

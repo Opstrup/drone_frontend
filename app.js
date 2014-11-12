@@ -5,10 +5,13 @@ angular
   .module('frontend', [
     'ui.router',
     'google-maps'.ns(),
+    'ui.bootstrap',
     'frontend.AuthenticationServices',
     'frontend.CRUDservices',
     'frontend.DroneServices',
-    'frontend.MapServices'
+    'frontend.MapServices',
+    'frontend.BootstrapServices',
+    'frontend.EventServices'
   ])
   .config(['$urlRouterProvider', '$stateProvider', 'GoogleMapApiProvider'.ns(), function($urlRouterProvider, $stateProvider, GoogleMapApi) {
     $urlRouterProvider.otherwise('/');

@@ -2,24 +2,29 @@
 
 angular
   .module('frontend')
-  .controller('homeCtrl', ['$scope', 'DroneServices', 'MapServices', function($scope, DroneServices, MapServices) {
+  .controller('homeCtrl', ['$scope', 'DroneServices', 'MapServices', 'BootstrapServices', function($scope, DroneServices, MapServices, BootstrapServices) {
     $scope.title = "Home";
     $scope.map = MapServices.initMap();
-    $scope.droneMarker = MapServices.initDroneMarker();
+    $scope.droneMarkerView = MapServices.initDroneMarker();
+    $scope.tooltipMsg = BootstrapServices.tooltipMessage();
     $scope.waypointList = [];
+    $scope.waypointListView = [];
+    $scope.noDroneSelected = true;
+
     $scope.events = {
       click: function (map, eventName, handlerArgs) {
         if (eventName === 'click') {
-          var loc = {
-            id: _.uniqueId(),
-            latitude: handlerArgs[0].latLng.lat(),
-            longitude: handlerArgs[0].latLng.lng(),
-          };
+          console.log("waypointListView lenght " + $scope.waypointListView.length);
+              var loc = {
+                id: $scope.waypointListView.length + 1,
+                latitude: handlerArgs[0].latLng.lat(),
+                longitude: handlerArgs[0].latLng.lng(),
+              };
         }
         $scope.$apply(function () {
-          console.log(loc);
+          // console.log(loc);
+          $scope.waypointListView.push(loc);
           $scope.waypointList.push(loc);
-          $scope.waypointsForDrone.push(loc);
         });
       }
     }
@@ -28,25 +33,26 @@ angular
       $scope.allDrones = allDronesInSystem;
     });
 
-    $scope.updateView = function(nextEventID, droneID) {
-
+    $scope.updateView = function(nextEventID, droneID){
+      $scope.noDroneSelected = false;
       DroneServices.getSingleDroneInfo(droneID).then(function(droneInformation){
+
         $scope.droneInformation = droneInformation;
-        $scope.droneMarker = MapServices.updateDroneMarker(droneInformation.latitude, droneInformation.longitude);
+
+        $scope.droneMarkerView = MapServices.updateDroneMarker(droneInformation.latitude, droneInformation.longitude);
         $scope.map = MapServices.updateMap(droneInformation.latitude, droneInformation.longitude);
       });
 
-      DroneServices.getWaypoints(nextEventID).then(function(waypointsForDrone){
-        $scope.waypointsForDrone = waypointsForDrone;
-        if(waypointsForDrone.length > 1)
-        {
-          $scope.waypointList = MapServices.drawWaypointsMarker(waypointsForDrone);
-        }
-        else
-        {
-          $scope.waypointList = [];
+      DroneServices.getWaypoints(nextEventID).then(function(waypointList){
+
+        $scope.waypointList = waypointList;
+        if(waypointList.length > 1){
+          $scope.waypointListView = MapServices.drawWaypointsMarker(waypointList);
+        } else {
+          $scope.waypointListView = [];
         }
       });
     }
+
 
 }]);

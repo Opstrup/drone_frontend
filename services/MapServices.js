@@ -96,21 +96,5 @@ angular
        return waypoints;
       },
 
-      /**
-       * Initialize the drawer for the map.
-       **/
-      initDrawMarker: function()
-      {
-        return {
-                  drawingControl: true,
-                  drawingControlOptions: {
-                    position: google.maps.ControlPosition.TOP_CENTER,
-                      drawingModes: [
-                        google.maps.drawing.OverlayType.MARKER,
-                      ]
-                  }
-                }
-      },
-
     }
   }]);
