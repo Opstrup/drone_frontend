@@ -11,7 +11,9 @@ angular
     'frontend.DroneServices',
     'frontend.MapServices',
     'frontend.BootstrapServices',
-    'frontend.EventServices'
+    'frontend.EventServices',
+    'frontend.WaypointServices',
+    'frontend.UserServices'
   ])
   .config(['$urlRouterProvider', '$stateProvider', 'GoogleMapApiProvider'.ns(), function($urlRouterProvider, $stateProvider, GoogleMapApi) {
     $urlRouterProvider.otherwise('/');

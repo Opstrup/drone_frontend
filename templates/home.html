@@ -45,25 +45,12 @@
     <div ng-show="waypointList.length >= 1">
       <!-- Event panel -->
       <div class="panel panel-default">
-        <div class="panel-heading">Test Evet #1</div>
-        <div class="panel-body">
-          Comment:
-        <textarea class="form-control" rows="1"></textarea>
+        <div class="panel-heading">
+          <input type="text" class="form-control" placeholder="Event name" ng-model="eventInformation.name">
         </div>
-        <ul class="list-group">
-          <li class="list-group-item">
-            <div class="input-group input-group-sm">
-              <span class="input-group-addon">Date</span>
-              <input type="text" class="form-control" placeholder="12. nov">
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="input-group input-group-sm">
-              <span class="input-group-addon">Warnings</span>
-              <input type="text" class="form-control" placeholder="0">
-            </div>
-          </li>
-        </ul>
+        <div class="panel-body">
+          <textarea class="form-control" rows="2" placeholder="Comment" ng-model="eventInformation.comment">{{eventInformation.comment}}</textarea>
+        </div>
       </div>
 
       <!-- Waypoint panel -->
@@ -83,7 +70,7 @@
             </td>
             <td>
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="{{waypoint.height}}">
+                <input type="text" class="form-control" placeholder="{{waypoint.height}}" ngmodel="height">
                 <span class="input-group-addon">m</span>
               </div>
             </td>
@@ -97,10 +84,10 @@
         </tbody>
       </table>
 
-      <!-- Start button -->
-      <button type="button" class="btn btn-default">
+      <!-- Save event btn -->
+      <button type="button" class="btn btn-default" ng-click="sendWaypoints(waypointList)">
         <div ng-if="waypointList.length >= 1">
-          Start drone
+          Save event
         </div>
       </button>
     </div>

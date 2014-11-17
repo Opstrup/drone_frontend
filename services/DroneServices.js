@@ -23,20 +23,10 @@ angular
             return deffered.promise;
           },
 
-          getWaypoints: function(eventID)
-          {
-            var deffered = $q.defer();
-            CRUDServiceDrone.get('/api/waypointsForEvent/' + eventID + '/?format=json')
-              .success(function(data) {
-                deffered.resolve(data);
-              })
-              .error(function(msg, code) {
-                deffered.reject(msg);
-                $log.error(msg, code);
-              });
-            return deffered.promise;
-          },
-
+          /**
+           * Gets a single drone in the system.
+           * Uses the CRUD Service to do the asynchronous get request.
+           **/
           getSingleDroneInfo: function(droneID)
           {
             var deffered = $q.defer();
@@ -49,7 +39,7 @@ angular
                 $log.error(msg, code);
               });
             return deffered.promise;
-          }
-          
+          },
+
         }
     }]);
