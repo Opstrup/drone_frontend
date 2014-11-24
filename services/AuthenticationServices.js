@@ -4,7 +4,6 @@ angular
     .module('frontend.AuthenticationServices', [])
     .factory('AuthenticationServices',['$location', 'CRUDServiceDrone', '$log', '$q', 'UserServices', function($location, CRUDServiceDrone, $log, $q, UserServices){
         return {
-
             /**
               * Checks if user authorized.
               * Redirects to home if user is authorized.
@@ -24,7 +23,6 @@ angular
                   });
                 return deffered.promise;
               }
-
 
               getUsers().then(function(userList){
                 angular.forEach(userList, function(user){

@@ -15,9 +15,9 @@ angular
         return _user;
       },
 
-      setUser: function(User_id, first_name)
+      setUser: function(user_id, first_name)
       {
-        _user.id = User_id;
+        _user.id = user_id;
         _user.first_name = first_name;
         _user.isLoggedIn = true;
       }

@@ -62,9 +62,9 @@ angular
     $scope.updateView = function(nextEventID, droneID){
       $scope.noDroneSelected = false;
 
-      EventServices.getEventList().then(function(eventList){
-        $scope.eventList = eventList;
-      })
+      // EventServices.getEventList().then(function(eventList){
+      //   $scope.eventList = eventList;
+      // })
 
       DroneServices.getSingleDroneInfo(droneID).then(function(droneInformation){
 
