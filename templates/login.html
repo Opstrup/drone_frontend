@@ -1,22 +1,20 @@
 <link href="costum_css/loginPage.css" rel="stylesheet" media="screen">
+  <body>
 
-  <div class="container">
-    <div class="content">
-      <div class="row">
-        <div class="login-form">
-          {{title}}
-          <form ng-submit="onLogIn()" name="login">
-            <fieldset>
-              <div class="clearfix">
-                <input type="text" placeholder="Username" ng-model="username" required>
-              </div>
-              <div class="clearfix">
-                <input type="password" placeholder="Password" ng-model="password" required>
-              </div>
-              <button class="btn primary" type="submit">Sign in</button>
-            </fieldset>
-          </form>
-        </div>
-      </div>
+    <div class="body"></div>
+    <div class="grad"></div>
+    <div class="header">
+      <div>Drone<span>Control</span></div>
     </div>
-  </div> <!-- /container -->
+    <br>
+    <div class="login">
+      <form ng-submit="onLogIn()" name="login">
+        <input type="text" placeholder="Username" name="user" ng-model="username" required><br>
+        <input type="password" placeholder="Password" name="password" ng-model="password" required><br>
+        <input type="submit" value="Login">
+      </form>
+    </div>
+
+    <!-- // <script src='http://codepen.io/assets/libs/fullpage/jquery.js'></script> -->
+
+  </body>
