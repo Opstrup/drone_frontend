@@ -1,3 +1,8 @@
+/*
+ * This class handels the logic behind the login
+ * function
+ */
+
 'use strict';
 
 angular

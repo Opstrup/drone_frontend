@@ -1,21 +1,11 @@
 'use strict';
 
-// Declare app level module which depends on views, and components
 angular
   .module('frontend', [
     'ui.router',
-    'google-maps'.ns(),
-    'ui.bootstrap',
-    'frontend.AuthenticationServices',
-    'frontend.CRUDservices',
-    'frontend.DroneServices',
-    'frontend.MapServices',
-    'frontend.BootstrapServices',
-    'frontend.EventServices',
-    'frontend.WaypointServices',
-    'frontend.UserServices'
+    'uiGmapgoogle-maps',
   ])
-  .config(['$urlRouterProvider', '$stateProvider', 'GoogleMapApiProvider'.ns(), function($urlRouterProvider, $stateProvider, GoogleMapApi) {
+  .config(['$urlRouterProvider', '$stateProvider', 'uiGmapGoogleMapApiProvider', function($urlRouterProvider, $stateProvider, GoogleMapApi) {
     $urlRouterProvider.otherwise('/');
 
     $stateProvider
@@ -33,16 +23,11 @@ angular
         url: '/archive',
         templateUrl: 'templates/archive.html',
         controller: 'archiveCtrl'
-      })
-      .state('settings', {
-        url: '/settings',
-        templateUrl: 'templates/settings.html',
-        controller: 'settingsCtrl'
       });
 
       GoogleMapApi.configure({
             key: 'AIzaSyBpkoDhSFjmB11ANxwUBkT6WUabM_lMZDU',
             v: '3.17',
             libraries: 'weather,geometry,visualization'
-        });
+      });
   }]);

@@ -1,3 +1,8 @@
+/*
+ * This class handels the logic behind the archive
+ * function
+ */
+
 'use strict';
 
 angular

@@ -1,13 +1,12 @@
+/*
+ * This class handels all communication betweend the webapplication
+ * and the server.
+ */
+
 'use strict'
 
-/**
- *	CRUD service:
- *	Takes url and returns operation.
- **/
-
-angular
-    .module('frontend.CRUDservices', [])
-    .factory('CRUDServiceDrone',['$http', function($http){
+angular.module('frontend')
+    .factory('CRUDServiceDrone', ['$http', function($http){
         var serverAddress = "http://127.0.0.1:8000";
 
         return {

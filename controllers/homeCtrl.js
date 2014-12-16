@@ -1,3 +1,8 @@
+/*
+ * This class handels the logic behind the home
+ * function
+ */
+
 'use strict';
 
 angular
@@ -13,11 +18,11 @@ angular
     $scope.eventName;
     $scope.user = UserServices.getUser();
 
-    /**
+    /*
      * Click event.
      * Triggers: Click on map
      * Updates: Drone information and draws new waypoints on map
-     **/
+     */
     $scope.events = {
       click: function (map, eventName, handlerArgs) {
         if (eventName === 'click' && $scope.noDroneSelected === false) {
@@ -54,17 +59,13 @@ angular
       $scope.allDrones = allDronesInSystem;
     });
 
-    /**
+    /*
      * Click event.
      * Triggers: Click on drone table
      * Updates: Drone information, waypoints on map and the list of available
-     **/
+     */
     $scope.updateView = function(nextEventID, droneID){
       $scope.noDroneSelected = false;
-
-      // EventServices.getEventList().then(function(eventList){
-      //   $scope.eventList = eventList;
-      // })
 
       DroneServices.getSingleDroneInfo(droneID).then(function(droneInformation){
 
@@ -91,11 +92,11 @@ angular
       });
     }
 
-    /**
+    /*
      * Click event.
      * Triggers: Click on start drone btn
      * Updates: Posts waypointList to database
-     **/
+     */
     $scope.sendWaypoints = function(waypointList){
       //Create event
       //User droneInformation to get active drone
@@ -105,7 +106,6 @@ angular
         EventServices.postEvent($scope.eventInformation);
         WaypointServices.postWaypoints(waypointList, 1);
       }
-      //If everything goes well change text on save event btn
     }
 
 }]);

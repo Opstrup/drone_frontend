@@ -1,13 +1,17 @@
+/*
+ * This class handels the user authentication
+ * if the user is authorized, he will be redirected to home view
+ */
+
 'use strict'
 
-angular
-    .module('frontend.AuthenticationServices', [])
+angular.module('frontend')
     .factory('AuthenticationServices',['$location', 'CRUDServiceDrone', '$log', '$q', 'UserServices', function($location, CRUDServiceDrone, $log, $q, UserServices){
         return {
-            /**
-              * Checks if user authorized.
-              * Redirects to home if user is authorized.
-              **/
+            /*
+             * Checks if user authorized.
+             * Redirects to home if user is authorized.
+             */
             authenticationUser: function(username, password){
 
               var getUsers = function ()

@@ -1,4 +1,5 @@
 <link href="costum_css/loginPage.css" rel="stylesheet" media="screen">
+  <title>Login</title>
   <body>
 
     <div class="body"></div>
@@ -11,10 +12,8 @@
       <form ng-submit="onLogIn()" name="login">
         <input type="text" placeholder="Username" name="user" ng-model="username" required><br>
         <input type="password" placeholder="Password" name="password" ng-model="password" required><br>
-        <input type="submit" value="Login">
+        <input type="submit" value="Login" ng-model="submit">
       </form>
     </div>
-
-    <!-- // <script src='http://codepen.io/assets/libs/fullpage/jquery.js'></script> -->
 
   </body>

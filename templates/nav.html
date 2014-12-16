@@ -1,9 +1,9 @@
 <ul class="nav nav-pills pull-right">
   <li class="active"><a ui-sref="home">Home</a></li>
   <li><a ui-sref="archive">Archive</a></li>
-  <li><a ui-sref="settings">Settings</a></li>
+  <!-- <li><a ui-sref="settings">Settings</a></li> -->
 
-  <div ng-if="user.isLoggedIn == true">
+  <div id="welcome_msg" ng-if="user.isLoggedIn == true">
     Welcome {{user.first_name}}
   </div>
   <div ng-if="user.isLoggedIn == false">

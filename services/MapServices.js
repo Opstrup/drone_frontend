@@ -1,15 +1,19 @@
+/*
+ * This class handels all logic behind map handling
+ * The class uses the GoogleMapApi class
+ */
+
 'use strict'
 
-angular
-  .module('frontend.MapServices', [])
+angular.module('frontend')
   .factory('MapServices',['GoogleMapApi'.ns(), function(GoogleMapApi){
     return{
 
-      /**
+      /*
        * Initialize the map on the page.
        * Zoom level is 17.
        * (The higher zoom level is the more zoom)
-       **/
+       */
       initMap: function()
       {
         return  {
@@ -19,12 +23,11 @@ angular
                   },
                   zoom: 17,
                 }
-
       },
 
-      /**
+      /*
        * Updates map center.
-       **/
+       */
       updateMap: function(centerLatitude, centerLongitude)
       {
         return {
@@ -36,10 +39,10 @@ angular
               };
       },
 
-      /**
+      /*
        * Initialize the mark for the drone.
        * Drone marke will always have id: 0.
-       **/
+       */
       initDroneMarker: function()
       {
         return {
@@ -47,10 +50,10 @@ angular
                 }
       },
 
-      /**
+      /*
        * Mark where the given drone is on the map.
        * Drone marke will always have id: 0.
-       **/
+       */
       updateDroneMarker: function(droneLatitude, droneLongitude)
       {
         return {
@@ -63,10 +66,10 @@ angular
                 }
       },
 
-      /**
+      /*
        * Draws all the waypoints for the drone on the map.
        * Input: waypoint array
-       **/
+       */
       drawWaypointsMarker: function(waypointArray)
       {
         var createWaypoints = function(i, latitude, longitude, idKey)
@@ -88,10 +91,10 @@ angular
           return returnValue;
         };
 
-       var waypoints = [];
-       for (var i = 0; i < waypointArray.length; i++) {
-         waypoints.push(createWaypoints(i, waypointArray[i].latitude, waypointArray[i].longitude))
-       }
+        var waypoints = [];
+        for (var i = 0; i < waypointArray.length; i++) {
+          waypoints.push(createWaypoints(i, waypointArray[i].latitude, waypointArray[i].longitude))
+        }
 
        return waypoints;
       },
