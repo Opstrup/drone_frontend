@@ -100,10 +100,17 @@ angular
     $scope.sendWaypoints = function(waypointList){
       //Create event
       //User droneInformation to get active drone
-      console.log($scope.eventInformation);
-      console.log($scope.droneInformation);
+      var droneID = $scope.droneInformation.id;
+      var userID = $scope.user.id;
       if(waypointList.length > 1){
-        EventServices.postEvent($scope.eventInformation);
+        EventServices.postEvent($scope.eventInformation, droneID, userID).then(function(){
+          EventServices.getEventList().then(function(eventList){
+            console.log(eventList.length-1);
+          });
+        });
+        
+        // TODO: Figure out what event id to send 
+        //       when posting waypoints.
         WaypointServices.postWaypoints(waypointList, 1);
       }
     }

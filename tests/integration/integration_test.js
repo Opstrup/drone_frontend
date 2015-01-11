@@ -36,5 +36,19 @@ describe('Drone Control Webapplikation', function() {
 		expect(browser.getTitle()).toEqual('Login');
 	});
 
+	it('Clicking a drone from the list and saving to server', function() {
+		browser.get('http://localhost/drone_frontend/#/');
+
+		element(by.model('username')).sendKeys('user');
+		element(by.model('password')).sendKeys('user');
+
+		element(by.model('submit')).click();
+
+		//Enters the homepage
+		element(by.id('drone_1')).click();
+		element(by.id('save_event')).click();
+
+		expect(browser.getTitle()).toEqual('Home');
+	});
 
 });

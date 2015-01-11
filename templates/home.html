@@ -18,7 +18,7 @@
       </thead>
       <tbody>
         <tr ng-repeat="drone in allDrones" ng-click="updateView(drone.next_event, drone.id)">
-          <td>{{drone.id}}</td>
+          <td id="drone_{{drone.id}}">{{drone.id}}</td>
           <td ng-if="drone.is_online == true">
             <div class="progress">
               <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemax="100" style="width: 100%">
@@ -71,7 +71,7 @@
             </td>
             <td>
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="{{waypoint.height}}" ngmodel="height">
+                <input type="text" class="form-control" id="waypointHeight" placeholder="{{waypoint.height}}" ngmodel="height">
                 <span class="input-group-addon">m</span>
               </div>
             </td>
@@ -86,7 +86,7 @@
       </table>
 
       <!-- Save event btn -->
-      <button type="button" class="btn btn-default" ng-click="sendWaypoints(waypointList)">
+      <button type="button" class="btn btn-default" ng-click="sendWaypoints(waypointList)" id="save_event">
         <div ng-if="waypointList.length >= 1">
           Save event
         </div>

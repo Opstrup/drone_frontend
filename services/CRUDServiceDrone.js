@@ -20,9 +20,9 @@ angular.module('frontend')
           	console.log("PUT from api");
           },
 
-          post: function(url)
+          post: function(url, object)
           {
-          	console.log("POST from api");
+          	return $http.post(serverAddress + url, object);
           },
 
           delete: function(url)
