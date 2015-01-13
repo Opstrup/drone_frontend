@@ -46,5 +46,26 @@ angular.module('frontend')
             return deffered.promise;
           },
 
+          /*
+           * Notifyes the drone when a new
+           * event is created for the drone
+           */
+          notifyDrone: function(drone, eventID)
+          {
+            var droneID = drone.id;
+            drone.next_event = eventID;
+
+            var deffered = $q.defer();
+            CRUDServiceDrone.put('/api/drones/' + droneID + '/', drone)
+              .success(function(data) {
+                deffered.resolve(data);
+              })
+              .error(function(msg, code) {
+                deffered.reject(msg);
+                $log.error(msg, code);
+              });
+            return deffered.promise;
+          },
+
         }
     }]);

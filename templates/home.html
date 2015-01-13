@@ -71,22 +71,21 @@
             </td>
             <td>
               <div class="input-group">
-                <input type="text" class="form-control" id="waypointHeight" placeholder="{{waypoint.height}}" ngmodel="height">
+                <input type="text" class="form-control" placeholder="{{waypoint.height}}" ng-model="waypoint.height">
                 <span class="input-group-addon">m</span>
               </div>
             </td>
             <td ng-if="waypoint.take_photo == true">
-              <input type="checkbox" checked>
+              <input type="checkbox" checked ng-model="waypoint.take_photo">
             </td>
             <td ng-if="waypoint.take_photo != true">
-              <input type="checkbox">
+              <input type="checkbox" ng-model="waypoint.take_photo">
             </td>
           </tr>
         </tbody>
       </table>
-
       <!-- Save event btn -->
-      <button type="button" class="btn btn-default" ng-click="sendWaypoints(waypointList)" id="save_event">
+      <button type="button" class="btn btn-default" ng-click="sendWaypoints()" id="save_event">
         <div ng-if="waypointList.length >= 1">
           Save event
         </div>
@@ -113,7 +112,6 @@
         </div>
       </div>
     </div>
-
   </div> <!-- Closing of column -->
 
   <!-- column with map -->

@@ -66,6 +66,7 @@ angular
      */
     $scope.updateView = function(nextEventID, droneID){
       $scope.noDroneSelected = false;
+      $scope.eventInformation = {};
 
       DroneServices.getSingleDroneInfo(droneID).then(function(droneInformation){
 
@@ -94,25 +95,26 @@ angular
 
     /*
      * Click event.
-     * Triggers: Click on start drone btn
-     * Updates: Posts waypointList to database
+     * Triggers: Click on save event btn
+     * Updates: Posts new event to database
+     * with 
      */
-    $scope.sendWaypoints = function(waypointList){
-      //Create event
-      //User droneInformation to get active drone
-      var droneID = $scope.droneInformation.id;
-      var userID = $scope.user.id;
-      if(waypointList.length > 1){
+    $scope.sendWaypoints = function(){
+      if(EventServices.validateEvent($scope.user, $scope.waypointList, $scope.eventInformation)){
+        var droneID = $scope.droneInformation.id;
+        var userID = $scope.user.id;
+        
         EventServices.postEvent($scope.eventInformation, droneID, userID).then(function(){
           EventServices.getEventList().then(function(eventList){
-            console.log(eventList.length-1);
+            var newEventID = eventList.length;
+            WaypointServices.postWaypoints($scope.waypointList, newEventID).then(function(){
+              DroneServices.notifyDrone($scope.droneInformation, newEventID).then(function(){
+                alert("Success");
+              });
+            });
           });
         });
-        
-        // TODO: Figure out what event id to send 
-        //       when posting waypoints.
-        WaypointServices.postWaypoints(waypointList, 1);
       }
     }
-
+    
 }]);

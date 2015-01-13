@@ -34,9 +34,20 @@ angular.module('frontend')
            */
           postWaypoints: function(waypointList, withEventID)
           {
+            var deffered = $q.defer();
             angular.forEach(waypointList, function(waypoint){
               waypoint.event_id = withEventID;
+
+              CRUDServiceDrone.post('/api/waypoints/', waypoint)
+              .success(function(data) {
+                deffered.resolve(data);
+              })
+              .error(function(msg, code) {
+                deffered.reject(msg);
+                $log.error(msg, code);
+              });
             });
+            return deffered.promise;
           }
 
         }

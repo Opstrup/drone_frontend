@@ -7,7 +7,8 @@
 
 angular.module('frontend')
     .factory('CRUDServiceDrone', ['$http', function($http){
-        var serverAddress = "http://127.0.0.1:8000";
+        // var serverAddress = "http://127.0.0.1:8000";
+        var serverAddress = "http://iha-11726.iha.dk";
 
         return {
           get: function(url)
@@ -15,9 +16,9 @@ angular.module('frontend')
             return $http.get(serverAddress + url);
           },
 
-          put: function(url)
+          put: function(url, object)
           {
-          	console.log("PUT from api");
+          	return $http.put(serverAddress + url, object);
           },
 
           post: function(url, object)
